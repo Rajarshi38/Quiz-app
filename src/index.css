@@ -15,7 +15,7 @@ body {
     height: 100vh;
 }
 .content {
-    height: 70%;
+    min-height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,6 +36,7 @@ body {
     align-items: center;
     gap: 5px;
 }
+
 .header nav {
     height: 50px;
     display: flex;
@@ -64,4 +65,32 @@ body {
 
 .header a:hover {
     color: black;
+}
+
+.questions {
+    padding: 0 20px;
+}
+.option-list {
+    display: grid;
+    grid-template-columns: 4fr 4fr;
+    grid-auto-rows: 1fr;
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.option-list button {
+    /* border: 1px solid black; */
+    border-radius: 12px;
+    margin: 5px 5px;
+}
+
+.controller {
+    margin-left: 20px;
+}
+
+.question-number {
+    text-align: center;
+    margin-bottom: 50px;
+    color: #3d93e3;
 }

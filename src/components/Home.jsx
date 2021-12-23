@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { DropdownButton } from "react-bootstrap";
+// import { DropdownButton } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-import { Dropdown } from "bootstrap";
+// import { Dropdown } from "bootstrap";
 
 const Home = () => {
     const [category, setCategory] = useState("");
@@ -17,10 +18,16 @@ const Home = () => {
                 <option value="Environment">Environment</option>
             </select>
 
-            <Button variant="outline-primary" style={{
-                marginTop : "10px"
-            }}>Start</Button>
-
+            <Button
+                as={Link}
+                to="/questions"
+                variant="outline-primary"
+                style={{
+                    marginTop: "10px",
+                }}
+            >
+                Start
+            </Button>
         </div>
     );
 };
