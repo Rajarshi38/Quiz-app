@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Question from "./Question";
+import { useParams } from "react-router-dom";
 const Questions = () => {
+    const { category } = useParams();
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [activeButton, setActiveButton] = useState(5);
 
     const decodeString = (str) => {
         const textArea = document.createElement("textarea");
@@ -12,28 +15,35 @@ const Questions = () => {
         return textArea.value;
     };
 
+    const activeButtonHandler = (index) => {
+        setActiveButton(index);
+    };
+
     useEffect(() => {
-        axios.get("https://opentdb.com/api.php?amount=10").then((res) => {
-            setLoading(true);
-            setQuestions(
-                res.data.results.map((questionItem, index) => {
-                    const answer = decodeString(questionItem.correct_answer);
-                    const options = [
-                        ...questionItem.incorrect_answers.map((a) => decodeString(a)),
-                        answer,
-                    ];
-                    return {
-                        id: `${index} - ${Date.now()}`,
-                        question: decodeString(questionItem.question),
-                        answer: answer,
-                        options: options.sort(() => Math.random() - 0.5),
-                    };
-                })
-            );
-            setLoading(false);
-            // console.log(questions);
-        });
-    }, []);
+        axios
+            .get(
+                `https://opentdb.com/api.php?amount=10&category=${category}&type=multiple`
+            )
+            .then((res) => {
+                setLoading(true);
+                setQuestions(
+                    res.data.results.map((questionItem, index) => {
+                        const answer = decodeString(questionItem.correct_answer);
+                        const options = [
+                            ...questionItem.incorrect_answers.map((a) => decodeString(a)),
+                            answer,
+                        ];
+                        return {
+                            id: `${index} - ${Date.now()}`,
+                            question: decodeString(questionItem.question),
+                            answer: answer,
+                            options: options.sort(() => Math.random() - 0.5),
+                        };
+                    })
+                );
+                setLoading(false);
+            });
+    }, [category]);
 
     // const currentQuestion = questions.slice(indexOfFirstQuestion, indexOfLastQuestion);
     const currentQuestion = questions[currentIndex];
@@ -49,7 +59,6 @@ const Questions = () => {
     if (loading) {
         return <div>Loading...</div>;
     }
-    console.log(questions.length);
 
     return (
         <div className="questions">
@@ -70,7 +79,12 @@ const Questions = () => {
                 </div>
             ))} */}
             <h3 className="question-number">Question - {currentIndex + 1}</h3>
-            <Question currentQuestion={currentQuestion} loading={loading} />
+            <Question
+                currentQuestion={currentQuestion}
+                loading={loading}
+                activeButton={activeButton}
+                activeButtonHandler={activeButtonHandler}
+            />
             <div
                 style={{
                     textAlign: "right",

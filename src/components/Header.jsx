@@ -32,7 +32,9 @@ const Header = () => {
                     <Nav.Link as={Link} to="/">
                         Home
                     </Nav.Link>
-                    <Nav.Link>About</Nav.Link>
+                    <Nav.Link as={Link} to="/home">
+                        Categories
+                    </Nav.Link>
                 </Nav>
                 <Nav className="me-4">
                     <Button variant="outline-light" className="">
