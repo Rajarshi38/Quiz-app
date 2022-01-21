@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Starter from "./components/Starter";
 import Header from "./components/Header";
 import Question from "./components/Questions";
+import Result from "./components/Result";
 
 function App() {
     return (
@@ -20,7 +21,8 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Starter />} />
                         <Route path="/home" element={<Home />} />
-                        <Route path="/questions/:category" element={<Question />} />
+                        <Route path="/questions" element={<Question />} />
+                        <Route path="/result" element={<Result/>}/>
                     </Routes>
                 </div>
             </div>

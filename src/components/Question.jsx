@@ -1,6 +1,11 @@
-import { useState } from "react";
-
-const Question = ({ currentQuestion, loading, activeButton, activeButtonHandler }) => {
+const Question = ({
+    currentQuestion,
+    loading,
+    currentIndex,
+    options,
+    activeButtonHandler,
+}) => {
+    // const [question, setQuestion] = useState(currentQuestion);
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -17,17 +22,25 @@ const Question = ({ currentQuestion, loading, activeButton, activeButtonHandler 
     //     });
     // });
 
+    // const activeButtonHandler = (index) => {
+    //     currentQuestion.selectedOption = index;
+    // };
+
     return (
         <div className="question-item" key={currentQuestion.id}>
             <div>{currentQuestion.question}</div>
             <div className="option-list">
                 {currentQuestion.options.map((option, index) => (
                     <button
+                        type="button"
                         className={`btn ${
-                            activeButton === index ? "btn-primary" : "btn-outline-primary"
+                            options[currentIndex] === index
+                                ? "btn-primary"
+                                : "btn-outline-primary"
                         }`}
+                        // key={`${option}-${options[currentIndex] === index}`}
                         key={option}
-                        onClick={() => activeButtonHandler(index)}
+                        onClick={() => activeButtonHandler(currentIndex, index, option)}
                     >
                         {option}
                     </button>

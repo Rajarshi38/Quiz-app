@@ -100,7 +100,8 @@ body {
 }
 
 .controller {
-    margin-left: 20px;
+    margin-left: 5px;
+    margin-right: 10px;
 }
 
 .question-number {
@@ -110,4 +111,7 @@ body {
 }
 .home select {
     max-width: 80%;
+}
+.submit {
+    margin-right: 7px;
 }

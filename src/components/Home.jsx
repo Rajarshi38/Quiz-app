@@ -2,8 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 // import { DropdownButton } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import Questions from "./Questions";
+
 import { useNavigate } from "react-router-dom";
 // import { Dropdown } from "bootstrap";
 
@@ -23,8 +22,8 @@ const Home = () => {
     }, []);
 
     const handleSubmit = (e) => {
-        // e.preventDefault();
-        navigate(`/questions/${category}`);
+        e.preventDefault();
+        navigate("/questions", { state: { category: category } });
     };
 
     if (loading) return <div>Loading...</div>;
