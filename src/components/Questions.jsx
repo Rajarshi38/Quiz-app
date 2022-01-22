@@ -4,15 +4,16 @@ import Question from "./Question";
 import { useNavigate, useLocation } from "react-router-dom";
 const Questions = () => {
     const { state } = useLocation();
+    const navigate = useNavigate();
 
     const { category } = state;
+
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
     // const [activeButton, setActiveButton] = useState(5);
     const [options, setOptions] = useState(new Array(10).fill(-1));
     const [score, setScore] = useState(new Array(10).fill(0));
-    const navigate = useNavigate();
 
     const decodeString = (str) => {
         const textArea = document.createElement("textarea");

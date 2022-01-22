@@ -10,12 +10,7 @@ const Result = () => {
             <h3>Your Score is {totalScore}</h3>
             <div>
                 Want to try another time? <Link to="/home">Change category</Link> or{" "}
-                <Link
-                    to={{
-                        pathname: "/questions",
-                        state: { category: category },
-                    }}
-                >
+                <Link to="/questions" state={{ category: category }}>
                     Same type
                 </Link>{" "}
             </div>
