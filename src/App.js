@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Question from "./components/Questions";
 import Result from "./components/Result";
 import Signup from "./components/Signup";
+import { AuthProvider } from "./components/Contexts/AuthContext";
 
 function App() {
   return (
@@ -24,7 +25,9 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/questions" element={<Question />} />
             <Route path="/result" element={<Result />} />
-            <Route path="/signup" element={<Signup />} />
+            <AuthProvider>
+              <Route path="/signup" element={<Signup />} />
+            </AuthProvider>
           </Routes>
         </div>
       </div>
