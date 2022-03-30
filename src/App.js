@@ -7,30 +7,32 @@ import Question from "./components/Questions";
 import Result from "./components/Result";
 import Signup from "./components/Signup";
 import { AuthProvider } from "./components/Contexts/AuthContext";
+import Login from "./components/Login";
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <header
-          style={{
-            marginBottom: "10px",
-          }}
-        >
-          <Header />
-        </header>
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Starter />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/questions" element={<Question />} />
-            <Route path="/result" element={<Result />} />
-            <AuthProvider>
+      <AuthProvider>
+        <div className="App">
+          <header
+            style={{
+              marginBottom: "10px",
+            }}
+          >
+            <Header />
+          </header>
+          <div className="content">
+            <Routes>
+              <Route path="/" element={<Starter />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/questions" element={<Question />} />
+              <Route path="/result" element={<Result />} />
               <Route path="/signup" element={<Signup />} />
-            </AuthProvider>
-          </Routes>
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </AuthProvider>
     </Router>
   );
 }

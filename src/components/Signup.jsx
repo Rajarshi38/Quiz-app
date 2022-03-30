@@ -1,6 +1,7 @@
 import { Form, Card, Button, Alert } from "react-bootstrap";
 import { useState, useRef } from "react";
 import { useAuth } from "./Contexts/AuthContext";
+import { Link } from "react-router-dom";
 const Signup = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -49,15 +50,16 @@ const Signup = () => {
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control type="password" required ref={confirmPasswordRef} />
             </Form.Group>
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-100 mt-3 mb-2"
-            >
+            <Button type="submit" disabled={loading} className="w-100 mt-3">
               Sign Up
             </Button>
           </Form>
-          Already have an account? Login
+          <div className="text-center mt-2 w-100">
+            Already have an account ?{" "}
+            <Link to="/login" className="text-decoration-none">
+              Log in
+            </Link>
+          </div>
         </Card.Body>
       </Card>
     </>

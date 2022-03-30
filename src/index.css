@@ -84,6 +84,8 @@ body {
 
 .questions {
   padding: 0 20px;
+  min-width: 400px;
+  width: 40%;
 }
 .option-list {
   display: grid;

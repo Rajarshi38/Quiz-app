@@ -11,7 +11,6 @@ const Questions = () => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const [activeButton, setActiveButton] = useState(5);
   const [options, setOptions] = useState(new Array(10).fill(-1));
   const [score, setScore] = useState(new Array(10).fill(0));
 
@@ -101,22 +100,6 @@ const Questions = () => {
 
   return (
     <div className="questions">
-      {/* {questions.map((question) => (
-                <div className="question-item" key={question.id}>
-                    <div>{question.question}</div>
-                    <div className="option-list">
-                        {question.options.map((option) => (
-                            <button
-                                className="btn btn-outline-primary"
-                                key={option}
-                                active="true"
-                            >
-                                {option}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            ))} */}
       <form onSubmit={submitHandler}>
         <h3 className="question-number">Question - {currentIndex + 1}</h3>
         <Question
