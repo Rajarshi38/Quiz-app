@@ -5,29 +5,31 @@ import Starter from "./components/Starter";
 import Header from "./components/Header";
 import Question from "./components/Questions";
 import Result from "./components/Result";
+import Signup from "./components/Signup";
 
 function App() {
-    return (
-        <Router>
-            <div className="App">
-                <header
-                    style={{
-                        marginBottom: "10px",
-                    }}
-                >
-                    <Header />
-                </header>
-                <div className="content">
-                    <Routes>
-                        <Route path="/" element={<Starter />} />
-                        <Route path="/home" element={<Home />} />
-                        <Route path="/questions" element={<Question />} />
-                        <Route path="/result" element={<Result/>}/>
-                    </Routes>
-                </div>
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+      <div className="App">
+        <header
+          style={{
+            marginBottom: "10px",
+          }}
+        >
+          <Header />
+        </header>
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Starter />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/questions" element={<Question />} />
+            <Route path="/result" element={<Result />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
+  );
 }
 
 export default App;

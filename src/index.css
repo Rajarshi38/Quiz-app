@@ -1,117 +1,118 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600;700&display=swap");
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
-    font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .App {
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: calc(100vh - 100px);
 }
 .content {
-    min-height: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    /* gap: 5px; */
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* gap: 5px; */
 }
 .starter {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 .starter h3 {
-    text-align: center;
+  text-align: center;
 }
 
 @media (max-width: 380px) {
-    .starter h3 {
-        padding-left: 5px;
-        padding-right: 5px;
-    }
+  .starter h3 {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 }
 .starter button {
-    margin-top: 4px;
+  margin-top: 4px;
 }
 .home {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 .header nav {
-    height: 50px;
-    display: flex;
-    justify-content: flex-start;
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .header ul {
-    list-style-type: none;
-    display: flex;
-    gap: 1.5rem;
-    color: #fff;
+  list-style-type: none;
+  display: flex;
+  gap: 1.5rem;
+  color: #fff;
 }
 .header nav h5 {
-    color: #fff;
-    margin-left: 10px;
-    margin-bottom: 20px;
+  color: #fff;
+  margin-left: 10px;
+  margin-bottom: 20px;
 }
 .header ul li {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .header a {
-    text-decoration: none;
-    color: #fff;
+  text-decoration: none;
+  color: #fff;
 }
 
 .header a:hover {
-    color: black;
+  color: black;
 }
 
 .questions {
-    padding: 0 20px;
-    /* width: 50%; */
+  padding: 0 20px;
 }
 .option-list {
-    display: grid;
-    grid-template-columns: 4fr 4fr;
-    grid-auto-rows: 1fr;
-    list-style-type: none;
-    padding-left: 0;
-    margin-top: 10px;
+  display: grid;
+  grid-template-columns: 4fr 4fr;
+  grid-auto-rows: 1fr;
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 10px;
 }
 
 .option-list button {
-    /* border: 1px solid black; */
-    border-radius: 12px;
-    margin: 5px 5px;
+  /* border: 1px solid black; */
+  border-radius: 12px;
+  margin: 5px 5px;
 }
 
 .controller {
-    margin-left: 5px;
-    margin-right: 10px;
+  margin-left: 5px;
+  margin-right: 10px;
 }
 
 .question-number {
-    text-align: center;
-    margin-bottom: 50px;
-    color: #3d93e3;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #3d93e3;
 }
 .home select {
-    max-width: 80%;
+  max-width: 80%;
 }
 .submit {
-    margin-right: 7px;
+  margin-right: 7px;
 }
