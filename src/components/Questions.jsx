@@ -2,16 +2,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Question from "./Question";
 import { useNavigate, useLocation } from "react-router-dom";
+import useCallbackPrompt from "./useCallbackPrompt";
+import Prompt from "./Prompt";
 
 const Questions = () => {
-  const { state } = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
-  const { category } = state;
+  const { category } = location.state;
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [options, setOptions] = useState(new Array(10).fill(-1));
   const [score, setScore] = useState(new Array(10).fill(0));
+  const [showDialog, setShowDialog] = useState(false);
+  const [showPrompt, confirmNavigation, cancelNavigation] =
+    useCallbackPrompt(showDialog);
 
   const decodeString = (str) => {
     const textArea = document.createElement("textarea");
@@ -40,9 +45,8 @@ const Questions = () => {
       newArray[questionNumber] = optionNumber;
       return newArray;
     });
-    // setDirty();
+    // setShowDialog(true);
   };
-
   useEffect(() => {
     axios
       .get(
@@ -66,10 +70,10 @@ const Questions = () => {
           })
         );
         setLoading(false);
+        setShowDialog(true);
       });
   }, [category]);
 
-  useEffect(() => {});
   // const currentQuestion = questions.slice(indexOfFirstQuestion, indexOfLastQuestion);
   const currentQuestion = questions[currentIndex];
 
@@ -97,6 +101,11 @@ const Questions = () => {
 
   return (
     <div className="questions">
+      <Prompt
+        showDialog={showPrompt}
+        confirmNavigation={confirmNavigation}
+        cancelNavigation={cancelNavigation}
+      />
       <form onSubmit={submitHandler}>
         <h3 className="question-number">Question - {currentIndex + 1}</h3>
         <Question
@@ -142,7 +151,11 @@ const Questions = () => {
               textAlign: "right",
             }}
           >
-            <button type="submit" className="btn btn-success submit">
+            <button
+              type="submit"
+              className="btn btn-success submit"
+              onClick={() => setShowDialog(false)}
+            >
               Submit
             </button>
           </div>
