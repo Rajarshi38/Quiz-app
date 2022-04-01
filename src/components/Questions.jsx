@@ -2,12 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Question from "./Question";
 import { useNavigate, useLocation } from "react-router-dom";
+
 const Questions = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-
   const { category } = state;
-
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -41,6 +40,7 @@ const Questions = () => {
       newArray[questionNumber] = optionNumber;
       return newArray;
     });
+    // setDirty();
   };
 
   useEffect(() => {
@@ -69,10 +69,7 @@ const Questions = () => {
       });
   }, [category]);
 
-  // useEffect(() => {
-  //     console.log(score);
-  // }, [score]);
-
+  useEffect(() => {});
   // const currentQuestion = questions.slice(indexOfFirstQuestion, indexOfLastQuestion);
   const currentQuestion = questions[currentIndex];
 

@@ -1,22 +1,24 @@
 import { useState, useRef } from "react";
 import { Card, Button, Form, Alert } from "react-bootstrap";
 import { useAuth } from "./Contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { signup } = useAuth();
+  const { login } = useAuth();
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await login(emailRef.current.value, passwordRef.current.value);
+      navigate("/home");
     } catch (error) {
-      setError("Failed to sign in");
+      setError("Failed to log in");
     }
 
     setLoading(false);

@@ -1,8 +1,9 @@
 import { Form, Card, Button, Alert } from "react-bootstrap";
 import { useState, useRef } from "react";
 import { useAuth } from "./Contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Signup = () => {
+  const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
@@ -10,6 +11,7 @@ const Signup = () => {
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,7 +21,12 @@ const Signup = () => {
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await signup(
+        usernameRef.current.value,
+        emailRef.current.value,
+        passwordRef.current.value
+      );
+      navigate("/home");
     } catch (error) {
       setError("Failed to create an account");
     }
@@ -38,6 +45,10 @@ const Signup = () => {
           <h2 className="text-center mb-2">Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
+            <Form.Group id="username">
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" required ref={usernameRef} />
+            </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" required ref={emailRef} />

@@ -8,6 +8,7 @@ import Result from "./components/Result";
 import Signup from "./components/Signup";
 import { AuthProvider } from "./components/Contexts/AuthContext";
 import Login from "./components/Login";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -24,7 +25,9 @@ function App() {
           <div className="content">
             <Routes>
               <Route path="/" element={<Starter />} />
-              <Route path="/home" element={<Home />} />
+              <Route path="/home" element={<PrivateRoute />}>
+                <Route path="/home" element={<Home />} />
+              </Route>
               <Route path="/questions" element={<Question />} />
               <Route path="/result" element={<Result />} />
               <Route path="/signup" element={<Signup />} />

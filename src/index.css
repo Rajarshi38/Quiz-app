@@ -24,6 +24,9 @@ body {
   flex-direction: column;
   /* gap: 5px; */
 }
+.warn {
+  font-size: 0.8rem;
+}
 .starter {
   display: flex;
   flex-direction: column;

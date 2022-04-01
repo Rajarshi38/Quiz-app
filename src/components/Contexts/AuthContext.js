@@ -14,13 +14,19 @@ export function AuthProvider({ children }) {
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
   }
-  function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+  function signup(username, email, password) {
+    return auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((cred) => cred.user.updateProfile({ displayName: username }))
+      .catch((err) => console.log(err));
+  }
+  function logout() {
+    return auth.signOut();
   }
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setLoading(false);
       setCurrentUser(user);
+      setLoading(false);
     });
 
     return unsubscribe;
@@ -30,6 +36,7 @@ export function AuthProvider({ children }) {
     currentUser,
     signup,
     login,
+    logout,
   };
   return (
     <AuthContext.Provider value={value}>

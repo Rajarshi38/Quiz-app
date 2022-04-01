@@ -1,24 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { Navbar, Nav } from "react-bootstrap";
+import { useAuth } from "./Contexts/AuthContext";
+
+import { useState } from "react";
 
 const Header = () => {
+  const [error, setError] = useState("");
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
+
+  async function logoutHandler() {
+    setError("");
+    try {
+      await logout();
+      navigate("/");
+    } catch (err) {
+      setError("Failed to Log Out");
+      alert(error);
+    }
+  }
+
   return (
     <div className="header">
-      {/* <nav className="navbar navbar-light bg-primary">
-                <h5 style={{
-                    color : "yellow"
-                }}>Hello Quiz</h5>
-                <ul>
-                    <Link to="/"><li>Home</li></Link>
-                    <li>About</li>
-                    <li>Contact</li>
-                    
-                </ul>
-            
-                
-            </nav> */}
-
       <Navbar bg="primary" variant="primary">
         <Navbar.Brand
           style={{
@@ -37,9 +41,15 @@ const Header = () => {
           </Nav.Link>
         </Nav>
         <Nav className="me-4">
-          <Button variant="outline-light" className="" as={Link} to="/signup">
-            Login
-          </Button>
+          {currentUser ? (
+            <Button variant="outline-light" onClick={logoutHandler}>
+              Logout
+            </Button>
+          ) : (
+            <Button variant="outline-light" className="" as={Link} to="/login">
+              Login
+            </Button>
+          )}
         </Nav>
       </Navbar>
     </div>
