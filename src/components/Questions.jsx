@@ -1,11 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Question from "./Question";
 import { useNavigate, useLocation } from "react-router-dom";
 import useCallbackPrompt from "./useCallbackPrompt";
 import Prompt from "./Prompt";
+import { useAuth } from "./Contexts/AuthContext";
+import { addUserToLeaderBoard } from "./api/FirebaseApi";
 
 const Questions = () => {
+  const { currentUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const { category } = location.state;
@@ -47,10 +50,13 @@ const Questions = () => {
     });
     // setShowDialog(true);
   };
+  console.log(category);
   useEffect(() => {
     axios
       .get(
-        `https://opentdb.com/api.php?amount=10&category=${category}&type=multiple`
+        `https://opentdb.com/api.php?amount=10&category=${
+          category ? category.id : ""
+        }&type=multiple`
       )
       .then((res) => {
         setLoading(true);
@@ -85,11 +91,16 @@ const Questions = () => {
     setCurrentIndex(currentIndex + 1);
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     let totalScore = score.reduce((previousValue, currentValue) => {
       return previousValue + currentValue;
     }, 0);
+    await addUserToLeaderBoard(
+      currentUser.displayName,
+      totalScore,
+      category ? category.name : "Random"
+    );
     navigate("/result", {
       state: { totalScore: totalScore, category: category },
     });

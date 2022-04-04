@@ -9,6 +9,7 @@ import Signup from "./components/Signup";
 import { AuthProvider } from "./components/Contexts/AuthContext";
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
+import LeaderBoard from "./components/LeaderBoard";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               <Route path="/result" element={<Result />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/leaderboard" element={<LeaderBoard />} />
             </Routes>
           </div>
         </div>

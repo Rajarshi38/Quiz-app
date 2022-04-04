@@ -1,26 +1,20 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-// import { DropdownButton } from "react-bootstrap";
+import { useState } from "react";
+
 import { Button } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
+import useCategories from "./api/useCategories";
 import { useAuth } from "./Contexts/AuthContext";
 
 const Home = () => {
   const { currentUser } = useAuth();
-  const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [category, setCategory] = useState(null);
+  const [loading, categories] = useCategories();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios.get("https://opentdb.com/api_category.php").then((res) => {
-      setLoading(true);
-      setCategories(res.data.trivia_categories);
-
-      setLoading(false);
-    });
-  }, []);
+  const handleChange = (e) => {
+    setCategory(JSON.parse(e.target.value));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,13 +37,13 @@ const Home = () => {
         defaultValue={"DEFAULT"}
         className="form-select"
         aria-label="Default select example"
-        onChange={(e) => setCategory(e.target.value)}
+        onChange={handleChange}
       >
         <option value="DEFAULT" disabled>
           Choose a Category ...
         </option>
         {categories.map((category) => (
-          <option value={category.id} key={category.id}>
+          <option value={JSON.stringify(category)} key={category.id}>
             {category.name}
           </option>
         ))}

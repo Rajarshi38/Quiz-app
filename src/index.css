@@ -67,11 +67,6 @@ body {
   gap: 1.5rem;
   color: #fff;
 }
-.header nav h5 {
-  color: #fff;
-  margin-left: 10px;
-  margin-bottom: 20px;
-}
 .header ul li {
   margin-right: 10px;
 }
@@ -120,4 +115,48 @@ body {
 }
 .submit {
   margin-right: 7px;
+}
+.leaderboard {
+  width: 100%;
+  height: inherit;
+}
+.leaderboard-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.leaderboard-main {
+  display: flex;
+  justify-content: center;
+}
+.content-table {
+  border-collapse: collapse;
+  font-size: 0.9em;
+  margin: 25px 0;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.content-table thead tr {
+  background-color: #6b9ded;
+  color: #fff;
+  text-align: left;
+}
+.content-table th {
+  font-weight: 500;
+}
+.content-table th,
+.content-table td {
+  padding: 12px 15px;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+.content-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+.content-table tbody tr:last-of-type {
+  border-bottom: 2px solid #6b9ded;
 }

@@ -40,7 +40,7 @@ const Header = () => {
             Categories
           </Nav.Link>
         </Nav>
-        <Nav className="me-4">
+        <Nav className="">
           {currentUser ? (
             <Button variant="outline-light" onClick={logoutHandler}>
               Logout
