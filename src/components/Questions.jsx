@@ -50,7 +50,7 @@ const Questions = () => {
     });
     // setShowDialog(true);
   };
-  console.log(category);
+
   useEffect(() => {
     axios
       .get(

@@ -15,7 +15,8 @@ const Signup = () => {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (usernameRef.current.value.length < 4)
+      return setError("username should be minimum 4 letters");
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
       return setError("Password do not match");
     }
@@ -56,7 +57,7 @@ const Signup = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group id="username">
               <Form.Label>Username</Form.Label>
-              <Form.Control type="text" required ref={usernameRef} />
+              <Form.Control type="text" required ref={usernameRef} pattern />
             </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
