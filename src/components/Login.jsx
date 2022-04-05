@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { Card, Button, Form, Alert } from "react-bootstrap";
 import { useAuth } from "./Contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -32,7 +33,15 @@ const Login = () => {
         }}
       >
         <Card.Body>
-          <h2 className="text-center mb-2">Log In</h2>
+          <h2 className="text-center mb-2">
+            <FaUser
+              style={{
+                marginBottom: "10px",
+                marginRight: "10px",
+              }}
+            />
+            Log In
+          </h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">

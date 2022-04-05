@@ -1,13 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { Navbar, Nav } from "react-bootstrap";
+
 import { useAuth } from "./Contexts/AuthContext";
+import { useRef } from "react";
 
 import { useState } from "react";
 
 const Header = () => {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
+  const toggleButtonRef = useRef();
   const navigate = useNavigate();
 
   async function logoutHandler() {
@@ -23,35 +25,45 @@ const Header = () => {
 
   return (
     <div className="header">
-      <Navbar bg="primary" variant="primary">
-        <Navbar.Brand
-          style={{
-            marginLeft: "20px",
-            color: "yellow",
-          }}
-        >
-          Hello-Quiz
-        </Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link as={Link} to="/">
-            Home
-          </Nav.Link>
-          <Nav.Link as={Link} to="/home">
-            Categories
-          </Nav.Link>
-        </Nav>
-        <Nav className="">
-          {currentUser ? (
-            <Button variant="outline-light" onClick={logoutHandler}>
-              Logout
-            </Button>
-          ) : (
-            <Button variant="outline-light" className="" as={Link} to="/login">
-              Login
-            </Button>
-          )}
-        </Nav>
-      </Navbar>
+      <div className="brand">
+        <Link to="/">
+          <img src="brand.png" alt="" />
+        </Link>
+      </div>
+      <div
+        className="toggle-button"
+        onClick={() => {
+          toggleButtonRef.current.classList.toggle("active");
+        }}
+      >
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
+      </div>
+      <div className="nav-links" ref={toggleButtonRef}>
+        <ul>
+          <li>
+            <Link to="/home">Categories</Link>
+          </li>
+          <li>
+            <Link to="/leaderboard">Leaderboard</Link>
+          </li>
+          <li>
+            {currentUser ? (
+              <button onClick={logoutHandler}>Logout</button>
+            ) : (
+              <Link
+                to="login"
+                style={{
+                  padding: "0",
+                }}
+              >
+                <button>Login</button>
+              </Link>
+            )}
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };
