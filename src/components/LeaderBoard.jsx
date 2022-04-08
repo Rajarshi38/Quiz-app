@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import { getUsers } from "./api/FirebaseApi";
 import useCategories from "./api/useCategories";
+import LeaderboardTable from "./LeaderboardTable";
+import Pagination from "./Pagination";
 const LeaderBoard = () => {
   const [users, setUsers] = useState([]);
   const [category, setCategory] = useState("ALL");
   const [loading, categories] = useCategories();
-  const [filteredUsers, setFilteredUsers] = useState();
+  const [dataLoading, setDataLoading] = useState(true);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
 
   useEffect(() => {
     const getUsersFromDB = async () => {
+      setDataLoading(true);
       const data = await getUsers();
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setDataLoading(false);
     };
     getUsersFromDB();
   }, []);
@@ -21,18 +28,17 @@ const LeaderBoard = () => {
       setFilteredUsers([...users.filter((user) => user.category === category)]);
   }, [users, category]);
 
-  function parseDate(date) {
-    return date.toLocaleString("en-gb", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour12: true,
-      hour: "2-digit",
-      minute: "2-digit",
-      timezone: "utc",
-    });
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const totalUsers = Math.ceil(filteredUsers.length / postsPerPage);
+  const currentUsers = filteredUsers.slice(indexOfFirstPost, indexOfLastPost);
+  function previousHandler() {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
   }
 
+  function nextHandler() {
+    if (currentPage < totalUsers) setCurrentPage(currentPage + 1);
+  }
   if (loading) return <div>Loading...</div>;
   return (
     <div className="leaderboard">
@@ -53,26 +59,12 @@ const LeaderBoard = () => {
         </select>
       </div>
       <div className="leaderboard-main">
-        <table className="content-table">
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Category</th>
-              <th>Marks</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredUsers.map((user) => (
-              <tr key={user.id}>
-                <td>{user.username}</td>
-                <td>{user.category}</td>
-                <td>{user.marks}</td>
-                <td>{parseDate(user.date.toDate())}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <LeaderboardTable users={currentUsers} loading={dataLoading} />
+        <Pagination
+          nextHandler={nextHandler}
+          previousHandler={previousHandler}
+          currentPage={currentPage}
+        />
       </div>
     </div>
   );

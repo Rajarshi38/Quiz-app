@@ -154,8 +154,7 @@ body {
   }
 }
 .questions {
-  padding: 0 20px;
-  min-width: 400px;
+  min-width: 350px;
   width: 40%;
 }
 .option-list {
@@ -201,13 +200,14 @@ body {
 }
 .leaderboard-main {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .content-table {
   border-collapse: collapse;
   font-size: 0.9em;
   margin: 25px 0;
-  min-width: 400px;
+  min-width: 375px;
   border-radius: 5px 5px 0 0;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -233,4 +233,28 @@ body {
 }
 .content-table tbody tr:last-of-type {
   border-bottom: 2px solid #6b9ded;
+}
+.paginate {
+  margin-bottom: 10px;
+}
+.paginate button {
+  background-color: transparent;
+  border: 1px solid rgb(174, 170, 170);
+  padding: 3px 8px;
+  font-size: 1.5em;
+}
+.previous {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.next {
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.paginate button:hover {
+  background-color: rgb(226, 226, 226);
 }
