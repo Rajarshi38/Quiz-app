@@ -1,44 +1,26 @@
-import { useEffect, useState } from "react";
-import { getUsers } from "./api/FirebaseApi";
+import { useState, useCallback } from "react";
 import useCategories from "./api/useCategories";
+
 import LeaderboardTable from "./LeaderboardTable";
 import Pagination from "./Pagination";
+import useLeaderboard from "./Hooks/useLeaderboard";
 const LeaderBoard = () => {
-  const [users, setUsers] = useState([]);
-  const [category, setCategory] = useState("ALL");
   const [loading, categories] = useCategories();
-  const [dataLoading, setDataLoading] = useState(true);
-  const [filteredUsers, setFilteredUsers] = useState([]);
+  const { filteredUsers, dataLoading, setCategory } = useLeaderboard();
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
-
-  useEffect(() => {
-    const getUsersFromDB = async () => {
-      setDataLoading(true);
-      const data = await getUsers();
-      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      setDataLoading(false);
-    };
-    getUsersFromDB();
-  }, []);
-
-  useEffect(() => {
-    if (category === "ALL") setFilteredUsers([...users]);
-    else
-      setFilteredUsers([...users.filter((user) => user.category === category)]);
-  }, [users, category]);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const totalUsers = Math.ceil(filteredUsers.length / postsPerPage);
   const currentUsers = filteredUsers.slice(indexOfFirstPost, indexOfLastPost);
-  function previousHandler() {
+  const previousHandler = useCallback(() => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
-  }
+  }, [currentPage, setCurrentPage]);
 
-  function nextHandler() {
+  const nextHandler = useCallback(() => {
     if (currentPage < totalUsers) setCurrentPage(currentPage + 1);
-  }
+  }, [currentPage, totalUsers, setCurrentPage]);
   if (loading) return <div>Loading...</div>;
   return (
     <div className="leaderboard">

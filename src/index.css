@@ -15,6 +15,8 @@ body {
 .App {
   width: 100%;
   height: calc(100vh - 100px);
+  position: relative;
+  z-index: 0;
 }
 .content {
   height: inherit;
@@ -211,6 +213,7 @@ body {
   font-size: 0.9em;
   margin: 25px 0;
   min-width: 375px;
+  min-height: 280px;
   border-radius: 5px 5px 0 0;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -220,11 +223,13 @@ body {
   color: #fff;
   text-align: left;
 }
+
 .content-table th {
   font-weight: 500;
 }
 .content-table th,
 .content-table td {
+  box-sizing: content-box;
   padding: 12px 15px;
 }
 

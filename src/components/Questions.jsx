@@ -1,8 +1,8 @@
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Question from "./Question";
 import { useNavigate, useLocation } from "react-router-dom";
-import useCallbackPrompt from "./useCallbackPrompt";
+import useCallbackPrompt from "./Hooks/useCallbackPrompt";
 import Prompt from "./Prompt";
 import { useAuth } from "./Contexts/AuthContext";
 import { addUserToLeaderBoard } from "./api/FirebaseApi";

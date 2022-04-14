@@ -1,14 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./Contexts/AuthContext";
 import { useRef } from "react";
-
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
 const Header = () => {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
+  const location = useLocation();
   const toggleButtonRef = useRef();
   const navigate = useNavigate();
+
+  const logoutButtonStyle = {
+    visibility: "hidden",
+  };
 
   async function logoutHandler() {
     setError("");
@@ -46,7 +51,11 @@ const Header = () => {
           <li>
             <Link to="/leaderboard">Leaderboard</Link>
           </li>
-          <li>
+          <li
+            style={
+              location.pathname === "/questions" ? logoutButtonStyle : null
+            }
+          >
             {currentUser ? (
               <button onClick={logoutHandler}>Logout</button>
             ) : (
