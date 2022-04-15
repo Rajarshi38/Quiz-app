@@ -24,10 +24,10 @@ const LeaderboardTable = ({ users, loading }) => {
       <tbody>
         {users.map((user) => (
           <tr key={user.id}>
-            <td>{user.username}</td>
-            <td>{user.category}</td>
-            <td>{user.marks}</td>
-            <td>{parseDate(user.date.toDate())}</td>
+            <td data-label="Username">{user.username}</td>
+            <td data-label="Category">{user.category}</td>
+            <td data-label="Marks">{user.marks}</td>
+            <td data-label="Date">{parseDate(user.date.toDate())}</td>
           </tr>
         ))}
       </tbody>

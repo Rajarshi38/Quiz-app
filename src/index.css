@@ -207,17 +207,18 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 0 10%;
 }
 .content-table {
   border-collapse: collapse;
   font-size: 0.9em;
   margin: 25px 0;
-  min-width: 375px;
-  min-height: 280px;
   border-radius: 5px 5px 0 0;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  padding: 0;
 }
+
 .content-table thead tr {
   background-color: #6b9ded;
   color: #fff;
@@ -229,8 +230,8 @@ body {
 }
 .content-table th,
 .content-table td {
-  box-sizing: content-box;
   padding: 12px 15px;
+  text-align: center;
 }
 
 .content-table tbody tr {
@@ -241,6 +242,35 @@ body {
 }
 .content-table tbody tr:last-of-type {
   border-bottom: 2px solid #6b9ded;
+}
+
+@media (max-width: 620px) {
+  .content-table thead {
+    display: none;
+  }
+  .content-table,
+  .content-table tbody,
+  .content-table tr,
+  .content-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .content-table tbody tr td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .content-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-weight: 500;
+    text-align: left;
+  }
 }
 .paginate {
   margin-bottom: 10px;
