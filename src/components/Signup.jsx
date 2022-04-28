@@ -20,6 +20,9 @@ const Signup = () => {
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
       return setError("Password do not match");
     }
+    if(passwordRef.current.value.length < 6){
+      return setError("Password must be 6 digit long!");
+    }
     try {
       setError("");
       setLoading(true);
